@@ -1,3 +1,7 @@
+// Copyright (c) 2026 Ty Bennett. All rights reserved.
+// Use of this source code is governed by an MIT license
+// that can be found in the LICENSE file.
+
 package main
 
 import (
@@ -17,12 +21,15 @@ const DEFAULT_NAMESPACE = "default"
 const DEFAULT_DEPLOYMENT_REPLICAS = 1
 const DEFAULT_CONTAINER_ACCESS_PORT = 22222
 
-var languageImages = map[string]string{
-	"python": "docker.io/library/python:3.14-slim",
-	"node":   "docker.io/library/node:22-slim",
-	"go":     "docker.io/library/golang:1.23-alpine",
-	"java":   "docker.io/library/eclipse-temurin:21-jdk",
-	"rust":   "docker.io/library/rust:1.82-slim",
+
+var languageImages = map[string] string{
+	"python":      "docker.io/library/python:3.14",
+	"python-slim": "docker.io/library/python:3.14-slim",
+	"node":        "docker.io/library/node:22-slim",
+
+	"go":   "docker.io/library/golang:1.23-alpine",
+	"java": "docker.io/library/eclipse-temurin:21-jdk",
+	"rust": "docker.io/library/rust:1.82-slim",
 }
 
 // answers collects everything gathered from the wizard
@@ -51,7 +58,10 @@ func main() {
 		replicas:            strconv.Itoa(DEFAULT_DEPLOYMENT_REPLICAS),
 		containerAccessPort: strconv.Itoa(DEFAULT_CONTAINER_ACCESS_PORT),
 	}
-	theme := huh.ThemeCharm()
+	// look at other themes
+	// purple/ aws themed for SBG
+	// theme := huh.ThemeCharm()
+	theme := huh.ThemeCatppuccin()
 
 	intro := huh.NewForm(
 		huh.NewGroup(
@@ -78,16 +88,19 @@ func main() {
 					huh.NewOption("Rust", "rust"),
 				).
 				Value(&a.language),
+		),
+		huh.NewGroup(
 			huh.NewSelect[string]().
-				Title("Container runtime").
-				Description("Which engine should build and run the container").
+				Title("Runtime").
+				Description("Base runtime for the container").
 				Options(
-					huh.NewOption("Podman", "podman"),
 					huh.NewOption("Docker", "docker"),
+					huh.NewOption("Podman", "podman"),
 				).
 				Value(&a.containerRuntime),
 		),
 	).WithTheme(theme)
+
 
 	if err := intro.Run(); err != nil {
 		reportFormError(err)

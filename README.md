@@ -7,12 +7,14 @@ A CLI tool to create containers for different development environments. Utilizes
 
 ## Overview
 
-The goal is to create a CLI tool that I can use to spin up different development containers that reflect different projets I am working on. I am sure that something like this already exists but I wanted to do it for me and for my own cluster. I am using Golang because it works well with cloud-native tooling such as Docker, Podman, K8s, etc. I also am using a cloud hosted CR (Elastic Container Registry), because I have credits for AWS, and I can authenticate first before running the jobs to spin-up the container images, and pull them down using my information and identity; so super secure 😎. 
+The goal is to create a CLI tool that I can use to spin up different development containers that reflect different projects I am working on. I am sure that something like this already exists but I wanted to do it for me and for my own cluster. I am using Golang because it works well with cloud-native tooling such as Docker, Podman, K8s, etc. I'm also using a cloud-hosted CR (Elastic Container Registry) because I have AWS credits, and I can authenticate first before running the jobs to spin up the container images and pull them down using my credentials and identity, so it's super secure 😎. 
 
 ## Installation
 
-The goal would be to curl the latest install script from my site. \
-```https://tybennett.net/tools/devspaces/install.sh```\
+The goal would be to curl the latest install script from my site.
+```
+curl -sSL https://tybennett.net/tools/devspaces/install.sh | bash -
+```
 This runs the shell script to install the program and add it to your PATH. 
 
 ## How to use

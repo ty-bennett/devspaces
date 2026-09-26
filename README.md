@@ -1,5 +1,8 @@
 # devspaces
-A cli tool to create containers for different development environments. Utilizes Podman in the backend for rootless runtime. Written in Go.
+
+> THIS IS A WIP and will be filled out as the project progresses
+
+A CLI tool to create containers for different development environments. Utilizes Podman in the backend for rootless runtime. Written in Go.
 
 
 ## Overview
@@ -8,32 +11,42 @@ The goal is to create a CLI tool that I can use to spin up different development
 
 ## Installation
 
-Idk how to make an app so this will be blank for now. The goal would be to curl the latest tarball from my domain. 
-E.g. `https://tybennett.net/tools/devspaces/install.sh` Then that will download the zip for you to install and add to your PATH. 
+The goal would be to curl the latest install script from my site. \
+```https://tybennett.net/tools/devspaces/install.sh```\
+This runs the shell script to install the program and add it to your PATH. 
 
 ## How to use
 
 First, you'll want to add the files to your PATH so you can call the `devspaces` command from anywhere.
-
-### Example
 ```
 curl -sSL https://tybennett.net/tools/devspaces/install.sh | bash -
+```
+Then, add the executable to your path
+```
 export PATH="$PATH:$(go env GOPATH)/bin"
-# then update your shell config
+```
+Source your config to apply the $PATH changes.
+```
 # linux
 source ~/.bashrc
 # mac (me)
 source ~/.zshrc
-
-# Then, to create a container using current dir we pass the first arg. Then all proceeding flags will be for customization.
-~/> devspaces .
-# For a full list of options, run `devspaces --help`
-~/> devspaces --help, -h, or help
-# For more info on a specific command, run `devspaces <command> --help`
-~/> devspaces <command> --help
-# For a specific runtime
-~/> devspaces . --runtime=java --version=25.0, shorthand is -r=java, -v=25.0
 ```
-Ok that's it for now.
 
-##
+Then, to create a container definition, use the `create` command to run through the TUI process to define all required variables. Defaults are preloaded for you. \
+```
+~/> devspaces create
+```
+For a full list of options, run `devspaces -h or --help or help`
+```
+~/> devspaces --help, -h, or help
+```
+For more info on a specific command, run `devspaces <command> --help, -h, or help`
+```
+~/> devspaces <command> --help, -h, or help
+```
+For a specific runtime
+```
+~/> devspaces create --runtime=java --version=25.0, shorthand is -r=java, -v=25.0
+```
+## TODO

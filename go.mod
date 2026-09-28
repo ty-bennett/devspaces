@@ -1,4 +1,4 @@
-module devspaces
+module github.com/ty-bennett/devspaces
 
 go 1.26.5
 

@@ -4,10 +4,25 @@
 
 package cli
 
-import "fmt"
+import (
+	"fmt"
 
-// runVersion prints build and version metadata once it is supplied at build
-// time (for example, with -ldflags).
-func runVersion(args []string) error {
-	return fmt.Errorf("version command is not implemented")
+	"github.com/spf13/cobra"
+)
+
+// version is set at build time, for example:
+//
+//	go build -ldflags "-X github.com/ty-bennett/devspaces/internal/cli.version=v0.1.0"
+var version = "dev"
+
+func newVersionCmd() *cobra.Command {
+	return &cobra.Command{
+		Use:   "version",
+		Short: "Print the devspaces version",
+		Args:  cobra.NoArgs,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			fmt.Fprintln(cmd.OutOrStdout(), "devspaces", version)
+			return nil
+		},
+	}
 }

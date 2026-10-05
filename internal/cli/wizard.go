@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/charmbracelet/huh"
 
@@ -77,7 +78,8 @@ func runWizard() error {
 					huh.NewOption("Java", "java"),
 					huh.NewOption("Rust", "rust"),
 				).
-				Value(&a.language),
+				Value(&a.language).
+				Validate(notEmpty("language")),
 		),
 		huh.NewGroup(
 			huh.NewSelect[string]().
@@ -87,7 +89,8 @@ func runWizard() error {
 					huh.NewOption("Docker", "docker"),
 					huh.NewOption("Podman", "podman"),
 				).
-				Value(&a.containerRuntime),
+				Value(&a.containerRuntime).
+				Validate(notEmpty("containerRuntime")),
 		),
 	).WithTheme(theme)
 
@@ -97,7 +100,7 @@ func runWizard() error {
 	}
 
 	// Now that the language is known, seed the image default before asking.
-	a.containerImage = language.DefaultImage(a.language)
+	a.containerImage = strings.ToLower(language.DefaultImage(a.language))
 
 	rest := huh.NewForm(
 		huh.NewGroup(

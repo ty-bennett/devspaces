@@ -13,15 +13,17 @@ import (
 // version is set at build time, for example:
 //
 //	go build -ldflags "-X github.com/ty-bennett/devspaces/internal/cli.version=v0.1.0"
-var version = "dev"
 
-func newVersionCmd() *cobra.Command {
+// update when building
+var version = "devspaces0.1.0"
+
+func versionCmd() *cobra.Command {
 	return &cobra.Command{
 		Use:   "version",
 		Short: "Print the devspaces version",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			fmt.Fprintln(cmd.OutOrStdout(), "devspaces", version)
+			fmt.Fprintln(cmd.OutOrStdout(), "devspaces version", version)
 			return nil
 		},
 	}

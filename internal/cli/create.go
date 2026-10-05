@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func newCreateCmd() *cobra.Command {
+func createCmd() *cobra.Command {
 	cfg := Config{}
 
 	cmd := &cobra.Command{

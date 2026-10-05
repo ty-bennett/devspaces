@@ -10,7 +10,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func newUpCmd() *cobra.Command {
+func upCmd() *cobra.Command {
 	cfg := Config{}
 
 	cmd := &cobra.Command{
@@ -25,9 +25,9 @@ func newUpCmd() *cobra.Command {
 	}
 
 	f := cmd.Flags()
-	f.StringVarP(&cfg.ContainerName, "name", "n", "", "name for the container")
+	f.StringVarP(&cfg.ContainerName, "name", "n", "my-container-name", "name for the container")
 	f.StringVarP(&cfg.Runtime, "runtime", "r", defaultContainerRuntime, "container runtime (podman or docker)")
-	f.IntVarP(&cfg.Port, "port", "p", 0, "port to publish from the container")
+	f.IntVarP(&cfg.Port, "port", "p", 32222, "port to expose from the container (32222)")
 
 	return cmd
 }

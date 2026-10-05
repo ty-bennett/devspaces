@@ -25,6 +25,14 @@ const defaultNamespace = "default"
 const defaultDeploymentReplicas = 1
 const defaultContainerAccessPort = 32222
 
+// banner is shown at the top of the wizard. It is 73 columns wide.
+const banner = `██████╗ ███████╗██╗   ██╗███████╗██████╗  █████╗  ██████╗███████╗███████╗
+██╔══██╗██╔════╝██║   ██║██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝
+██║  ██║█████╗  ██║   ██║███████╗██████╔╝███████║██║     █████╗  ███████╗
+██║  ██║██╔══╝  ╚██╗ ██╔╝╚════██║██╔═══╝ ██╔══██║██║     ██╔══╝  ╚════██║
+██████╔╝███████╗ ╚████╔╝ ███████║██║     ██║  ██║╚██████╗███████╗███████║
+╚═════╝ ╚══════╝  ╚═══╝  ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝╚══════╝╚══════╝`
+
 // answers collects everything gathered from the wizard
 type answers struct {
 	directory           string
@@ -57,7 +65,7 @@ func runWizard() error {
 	intro := huh.NewForm(
 		huh.NewGroup(
 			huh.NewNote().
-				Title("devspaces").
+				Title(banner).
 				Description("Spin up a development container for this project.\nAnswer a few questions to get started."),
 		),
 		huh.NewGroup(
